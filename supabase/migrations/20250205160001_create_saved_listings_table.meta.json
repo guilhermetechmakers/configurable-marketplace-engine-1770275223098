@@ -1,0 +1,12 @@
+{
+  "migration_name": "20250205160001_create_saved_listings_table",
+  "created_at": "2025-02-05T16:00:01Z",
+  "description": "Create saved_listings table for buyer saved items and saved searches",
+  "tables_created": ["saved_listings"],
+  "tables_modified": [],
+  "tables_deleted": [],
+  "breaking_changes": false,
+  "rollback_sql": "DROP TABLE IF EXISTS saved_listings CASCADE;",
+  "estimated_rows": 0,
+  "requires_downtime": false
+}

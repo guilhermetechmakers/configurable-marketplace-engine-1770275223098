@@ -1,0 +1,12 @@
+{
+  "migration_name": "20250205160002_create_user_recommendations_table",
+  "created_at": "2025-02-05T16:00:02Z",
+  "description": "Create user_recommendations table for personalized listing suggestions and feedback",
+  "tables_created": ["user_recommendations"],
+  "tables_modified": [],
+  "tables_deleted": [],
+  "breaking_changes": false,
+  "rollback_sql": "DROP TABLE IF EXISTS user_recommendations CASCADE;",
+  "estimated_rows": 0,
+  "requires_downtime": false
+}

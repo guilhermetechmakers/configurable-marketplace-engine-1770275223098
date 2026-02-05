@@ -1,0 +1,12 @@
+{
+  "migration_name": "20250205160000_create_conversations_and_messages_tables",
+  "created_at": "2025-02-05T16:00:00Z",
+  "description": "Create message_conversations and messages tables for buyer-seller in-app messaging",
+  "tables_created": ["message_conversations", "messages"],
+  "tables_modified": [],
+  "tables_deleted": [],
+  "breaking_changes": false,
+  "rollback_sql": "DROP TABLE IF EXISTS messages CASCADE; DROP TABLE IF EXISTS message_conversations CASCADE;",
+  "estimated_rows": 0,
+  "requires_downtime": false
+}
