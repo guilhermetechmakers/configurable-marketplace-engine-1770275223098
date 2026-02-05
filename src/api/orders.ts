@@ -22,6 +22,9 @@ export const ordersApi = {
     listing_id: string
     quantity?: number
     dates?: { start: string; end: string }
+    promo_code_id?: string
+    billing_address?: Record<string, string>
+    shipping_address?: Record<string, string>
   }): Promise<Order> => api.post<Order>('/orders', body),
 
   getSellerOrders: async (params?: {

@@ -1,0 +1,12 @@
+{
+  "migration_name": "20250205190000_create_promo_codes_table",
+  "created_at": "2025-02-05T19:00:00Z",
+  "description": "Create promo_codes table for checkout discounts (code, type, value, expiry, usage)",
+  "tables_created": ["promo_codes"],
+  "tables_modified": [],
+  "tables_deleted": [],
+  "breaking_changes": false,
+  "rollback_sql": "DROP TABLE IF EXISTS promo_codes CASCADE;",
+  "estimated_rows": 0,
+  "requires_downtime": false
+}
