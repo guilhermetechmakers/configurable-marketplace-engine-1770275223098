@@ -18,7 +18,6 @@ import {
 } from '@/components/ui/select'
 import { MainLayout } from '@/components/layout/MainLayout'
 import { AnimatedPage } from '@/components/AnimatedPage'
-import { PasswordResetModal } from '@/components/auth/PasswordResetModal'
 import { EmailVerificationDialog } from '@/components/auth/EmailVerificationDialog'
 import {
   useSignIn,
@@ -72,7 +71,6 @@ export function Auth() {
   const navigate = useNavigate()
   const location = useLocation()
   const defaultTab = location.pathname === '/signup' ? 'signup' : 'login'
-  const [resetModalOpen, setResetModalOpen] = useState(false)
   const [verificationDialogOpen, setVerificationDialogOpen] = useState(false)
   const [verificationEmail, setVerificationEmail] = useState<string | undefined>()
 
@@ -216,13 +214,12 @@ export function Auth() {
                         </label>
                       )}
                     />
-                    <button
-                      type="button"
+                    <Link
+                      to="/password-reset"
                       className="rounded text-sm font-medium text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
-                      onClick={() => setResetModalOpen(true)}
                     >
                       Forgot password?
-                    </button>
+                    </Link>
                   </div>
                   <Button
                     type="submit"
@@ -477,7 +474,6 @@ export function Auth() {
         </Card>
       </AnimatedPage>
 
-      <PasswordResetModal open={resetModalOpen} onOpenChange={setResetModalOpen} />
       <EmailVerificationDialog
         open={verificationDialogOpen}
         onOpenChange={setVerificationDialogOpen}

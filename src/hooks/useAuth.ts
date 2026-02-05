@@ -81,6 +81,21 @@ export function usePasswordResetRequest() {
   })
 }
 
+export function usePasswordReset() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ token, newPassword }: { token: string; newPassword: string }) =>
+      authApi.resetPassword(token, newPassword),
+    onSuccess: () => {
+      queryClient.clear()
+      toast.success('Password updated. You can sign in with your new password.')
+    },
+    onError: (err: Error) => {
+      toast.error(err.message ?? 'Password update failed')
+    },
+  })
+}
+
 export function useResendVerification() {
   return useMutation({
     mutationFn: authApi.resendVerification,
