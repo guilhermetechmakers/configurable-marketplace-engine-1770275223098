@@ -3,10 +3,11 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { MainLayout } from '@/components/layout/MainLayout'
 import { AnimatedPage } from '@/components/AnimatedPage'
-import { useResendVerification } from '@/hooks/useAuth'
+import { useResendVerification, useCurrentUser } from '@/hooks/useAuth'
 import { Loader2, Mail, CheckCircle } from 'lucide-react'
 
 export function VerifyEmail() {
+  const { data: user } = useCurrentUser()
   const resend = useResendVerification()
   type VerifyStatus = 'pending' | 'success' | 'failed'
   const status = 'pending' as VerifyStatus // In real app, derive from query params or API
@@ -58,7 +59,7 @@ export function VerifyEmail() {
               variant="outline"
               className="w-full"
               disabled={resend.isPending}
-              onClick={() => resend.mutate()}
+              onClick={() => resend.mutate(user?.email)}
             >
               {resend.isPending ? 'Sending...' : 'Resend verification email'}
             </Button>

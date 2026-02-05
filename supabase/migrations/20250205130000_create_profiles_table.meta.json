@@ -1,0 +1,12 @@
+{
+  "migration_name": "20250205130000_create_profiles_table",
+  "created_at": "2025-02-05T13:00:00Z",
+  "description": "Create profiles table extending auth.users with full_name, role, company for marketplace",
+  "tables_created": ["profiles"],
+  "tables_modified": [],
+  "tables_deleted": [],
+  "breaking_changes": false,
+  "rollback_sql": "DROP TABLE IF EXISTS profiles CASCADE;",
+  "estimated_rows": 0,
+  "requires_downtime": false
+}

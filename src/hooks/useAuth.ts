@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { authApi } from '@/api/auth'
 import { usersApi } from '@/api/users'
+import { isSupabaseConfigured } from '@/lib/supabase'
 import { toast } from 'sonner'
 
 export const authKeys = {
@@ -10,10 +11,15 @@ export const authKeys = {
 export function useCurrentUser() {
   return useQuery({
     queryKey: authKeys.user,
-    queryFn: usersApi.getCurrent,
+    queryFn: () =>
+      isSupabaseConfigured()
+        ? authApi.getCurrentUser()
+        : usersApi.getCurrent(),
     retry: false,
     staleTime: 1000 * 60 * 10,
-    enabled: typeof window !== 'undefined' && !!localStorage.getItem('auth_token'),
+    enabled:
+      typeof window !== 'undefined' &&
+      (!!localStorage.getItem('auth_token') || isSupabaseConfigured()),
   })
 }
 
@@ -34,9 +40,13 @@ export function useSignIn() {
 }
 
 export function useSignUp() {
+  const queryClient = useQueryClient()
   return useMutation({
     mutationFn: authApi.signUp,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      if (data.user) {
+        queryClient.setQueryData(authKeys.user, data.user)
+      }
       toast.success('Account created. Please verify your email.')
     },
     onError: (err: Error) => {
@@ -79,6 +89,19 @@ export function useResendVerification() {
     },
     onError: (err: Error) => {
       toast.error(err.message ?? 'Failed to resend')
+    },
+  })
+}
+
+export function useSignInWithOAuth() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: authApi.signInWithOAuth,
+    onError: (err: Error) => {
+      toast.error(err.message ?? 'Social login failed')
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: authKeys.user })
     },
   })
 }
