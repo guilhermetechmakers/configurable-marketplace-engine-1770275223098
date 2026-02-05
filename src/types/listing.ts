@@ -65,3 +65,47 @@ export interface UpdateListingInput extends Partial<CreateListingInput> {
   id: string
   status?: ListingStatus
 }
+
+/** Wizard step ids for Create/Edit Listing */
+export const LISTING_WIZARD_STEPS = [
+  'category',
+  'details',
+  'media',
+  'pricing',
+  'availability',
+  'policies',
+  'preview',
+] as const
+
+export type ListingWizardStepId = (typeof LISTING_WIZARD_STEPS)[number]
+
+/** Form field definition for dynamic listing details (from category schema) */
+export interface ListingDetailField {
+  key: string
+  label: string
+  type: 'text' | 'textarea' | 'number' | 'select' | 'checkbox' | 'date'
+  required?: boolean
+  placeholder?: string
+  options?: { value: string; label: string }[]
+  min?: number
+  max?: number
+  conditional?: { key: string; value: string | number | boolean }
+}
+
+/** Category with optional detail schema for dynamic form */
+export interface ListingCategoryWithSchema extends ListingCategory {
+  detail_schema?: ListingDetailField[]
+}
+
+/** Availability slot (single or range) */
+export interface AvailabilitySlot {
+  start_date: string
+  end_date: string
+  recurring_pattern?: 'daily' | 'weekly' | 'monthly' | null
+}
+
+/** Policy entry for listing */
+export interface ListingPolicy {
+  type: 'shipping' | 'returns' | 'cancellation' | 'service_terms'
+  content: string
+}

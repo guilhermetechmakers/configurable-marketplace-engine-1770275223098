@@ -53,6 +53,7 @@ export default function App() {
           </Route>
           <Route path="/listings" element={<Listings />} />
           <Route path="/listings/create" element={<CreateListing />} />
+          <Route path="/listings/:id/edit" element={<CreateListing />} />
           <Route path="/listings/:id" element={<ListingDetail />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/orders" element={<Orders />} />

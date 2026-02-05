@@ -31,6 +31,7 @@ import {
   Calendar,
   ChevronRight,
   FileText,
+  Pencil,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { BookingInquiryFormValues } from '@/components/listing-detail'
@@ -383,6 +384,15 @@ export function ListingDetail() {
                   </div>
                 )}
                 <div className="mt-6 flex flex-col gap-2">
+                  {user?.id === listing.seller_id ? (
+                    <Button className="w-full transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]" asChild variant="outline">
+                      <Link to={`/listings/${listing.id}/edit`}>
+                        <Pencil className="mr-2 h-4 w-4" />
+                        Edit listing
+                      </Link>
+                    </Button>
+                  ) : (
+                    <>
                   <Button className="w-full transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]" asChild>
                     <Link to={`/checkout?listing=${listing.id}${quantity > 1 ? `&qty=${quantity}` : ''}`}>
                       <ShoppingCart className="mr-2 h-4 w-4" />
@@ -410,6 +420,8 @@ export function ListingDetail() {
                   >
                     Request quote
                   </Button>
+                    </>
+                  )}
                 </div>
                 <div className="mt-6">
                   <ListingDetailMessagingWidget

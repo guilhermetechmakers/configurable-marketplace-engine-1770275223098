@@ -343,7 +343,13 @@ export function SellerDashboard() {
                                   onClick={() => setEditListing(listing)}
                                 >
                                   <Pencil className="mr-2 h-4 w-4" />
-                                  Edit
+                                  Quick edit
+                                </DropdownMenuItem>
+                                <DropdownMenuItem asChild>
+                                  <Link to={`/listings/${listing.id}/edit`}>
+                                    <Pencil className="mr-2 h-4 w-4" />
+                                    Full edit (wizard)
+                                  </Link>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem asChild>
                                   <Link
