@@ -96,6 +96,21 @@ export function usePasswordReset() {
   })
 }
 
+export function useVerifyEmailToken() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ tokenHash, type }: { tokenHash: string; type?: 'email' | 'signup' }) =>
+      authApi.verifyToken(tokenHash, type ?? 'email'),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: authKeys.user })
+      toast.success('Email verified successfully')
+    },
+    onError: (err: Error) => {
+      toast.error(err.message ?? 'Verification failed')
+    },
+  })
+}
+
 export function useResendVerification() {
   return useMutation({
     mutationFn: authApi.resendVerification,

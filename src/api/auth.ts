@@ -129,6 +129,19 @@ export const authApi = {
     await api.post('/auth/reset-password', { token, password: newPassword })
   },
 
+  /** Verify email via token from confirmation link (Supabase: token_hash + type in URL) */
+  verifyToken: async (tokenHash: string, type: 'email' | 'signup' = 'email'): Promise<void> => {
+    if (isSupabaseConfigured() && supabase) {
+      const { error } = await supabase.auth.verifyOtp({
+        token_hash: tokenHash,
+        type,
+      })
+      if (error) throw new Error(error.message)
+      return
+    }
+    await api.post('/auth/verify-email', { token: tokenHash })
+  },
+
   resendVerification: async (email?: string): Promise<void> => {
     if (isSupabaseConfigured() && supabase) {
       const targetEmail =
