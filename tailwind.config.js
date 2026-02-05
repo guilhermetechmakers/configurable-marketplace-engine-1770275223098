@@ -30,6 +30,7 @@ export default {
         input: 'rgb(var(--input))',
         ring: 'rgb(var(--ring))',
         destructive: 'rgb(var(--destructive))',
+        yellow: 'rgb(var(--yellow))',
         muted: {
           DEFAULT: 'rgb(var(--muted))',
           foreground: 'rgb(var(--muted-foreground))',
@@ -86,6 +87,13 @@ export default {
           '70%': { transform: 'scale(0.9)' },
           '100%': { opacity: '1', transform: 'scale(1)' },
         },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+      },
+      backgroundSize: {
+        'shimmer': '200% 100%',
       },
     },
   },

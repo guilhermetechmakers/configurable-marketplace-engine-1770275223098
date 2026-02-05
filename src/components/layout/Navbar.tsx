@@ -17,6 +17,14 @@ const navLinks = [
   { to: '/dashboard', label: 'Dashboard' },
 ]
 
+const landingAnchorLinks = [
+  { to: '/#templates', label: 'Templates' },
+  { to: '/#how-it-works', label: 'How it works' },
+  { to: '/#features', label: 'Features' },
+  { to: '/#pricing', label: 'Pricing' },
+  { to: '/#testimonials', label: 'Testimonials' },
+]
+
 export function Navbar() {
   const location = useLocation()
   const { data: user, isLoading: userLoading } = useCurrentUser()
@@ -31,18 +39,28 @@ export function Navbar() {
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
-          {navLinks.map(({ to, label }) => (
-            <Link
-              key={to}
-              to={to}
-              className={cn(
-                'text-sm font-medium transition-colors hover:text-primary',
-                location.pathname === to ? 'text-primary' : 'text-muted-foreground',
-              )}
-            >
-              {label}
-            </Link>
-          ))}
+          {location.pathname === '/'
+            ? landingAnchorLinks.map(({ to, label }) => (
+                <a
+                  key={to}
+                  href={to}
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                >
+                  {label}
+                </a>
+              ))
+            : navLinks.map(({ to, label }) => (
+                <Link
+                  key={to}
+                  to={to}
+                  className={cn(
+                    'text-sm font-medium transition-colors hover:text-primary',
+                    location.pathname === to ? 'text-primary' : 'text-muted-foreground',
+                  )}
+                >
+                  {label}
+                </Link>
+              ))}
         </nav>
 
         <div className="flex items-center gap-3">
@@ -111,21 +129,32 @@ export function Navbar() {
       {mobileOpen && (
         <div className="border-t border-border bg-card px-6 py-4 md:hidden">
           <nav className="flex flex-col gap-2">
-            {navLinks.map(({ to, label }) => (
-              <Link
-                key={to}
-                to={to}
-                className={cn(
-                  'rounded-lg px-3 py-2 text-sm font-medium',
-                  location.pathname === to
-                    ? 'bg-accent text-primary'
-                    : 'text-muted-foreground',
-                )}
-                onClick={() => setMobileOpen(false)}
-              >
-                {label}
-              </Link>
-            ))}
+            {location.pathname === '/'
+              ? landingAnchorLinks.map(({ to, label }) => (
+                  <a
+                    key={to}
+                    href={to}
+                    className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-primary"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {label}
+                  </a>
+                ))
+              : navLinks.map(({ to, label }) => (
+                  <Link
+                    key={to}
+                    to={to}
+                    className={cn(
+                      'rounded-lg px-3 py-2 text-sm font-medium',
+                      location.pathname === to
+                        ? 'bg-accent text-primary'
+                        : 'text-muted-foreground',
+                    )}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {label}
+                  </Link>
+                ))}
           </nav>
         </div>
       )}

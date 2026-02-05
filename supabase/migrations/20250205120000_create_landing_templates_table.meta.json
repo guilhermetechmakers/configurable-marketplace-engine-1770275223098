@@ -1,0 +1,12 @@
+{
+  "migration_name": "20250205120000_create_landing_templates_table",
+  "created_at": "2025-02-05T12:00:00Z",
+  "description": "Create landing_templates table for use-case template cards on landing page",
+  "tables_created": ["landing_templates"],
+  "tables_modified": [],
+  "tables_deleted": [],
+  "breaking_changes": false,
+  "rollback_sql": "DROP TABLE IF EXISTS landing_templates CASCADE;",
+  "estimated_rows": 0,
+  "requires_downtime": false
+}
