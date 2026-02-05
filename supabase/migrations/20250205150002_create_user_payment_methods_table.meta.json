@@ -1,0 +1,12 @@
+{
+  "migration_name": "20250205150002_create_user_payment_methods_table",
+  "created_at": "2025-02-05T15:00:02Z",
+  "description": "Create user_payment_methods table for payment methods management",
+  "tables_created": ["user_payment_methods"],
+  "tables_modified": [],
+  "tables_deleted": [],
+  "breaking_changes": false,
+  "rollback_sql": "DROP TABLE IF EXISTS user_payment_methods CASCADE;",
+  "estimated_rows": 0,
+  "requires_downtime": false
+}

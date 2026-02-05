@@ -1,0 +1,12 @@
+{
+  "migration_name": "20250205150000_add_profile_bio_and_verification",
+  "created_at": "2025-02-05T15:00:00Z",
+  "description": "Add bio and verification_status columns to profiles table",
+  "tables_created": [],
+  "tables_modified": ["profiles"],
+  "tables_deleted": [],
+  "breaking_changes": false,
+  "rollback_sql": "ALTER TABLE profiles DROP COLUMN IF EXISTS bio; ALTER TABLE profiles DROP COLUMN IF EXISTS verification_status;",
+  "estimated_rows": 0,
+  "requires_downtime": false
+}

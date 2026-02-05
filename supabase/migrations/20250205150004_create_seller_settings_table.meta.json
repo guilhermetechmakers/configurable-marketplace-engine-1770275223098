@@ -1,0 +1,12 @@
+{
+  "migration_name": "20250205150004_create_seller_settings_table",
+  "created_at": "2025-02-05T15:00:04Z",
+  "description": "Create seller_settings table for seller storefront and payout options",
+  "tables_created": ["seller_settings"],
+  "tables_modified": [],
+  "tables_deleted": [],
+  "breaking_changes": false,
+  "rollback_sql": "DROP TABLE IF EXISTS seller_settings CASCADE;",
+  "estimated_rows": 0,
+  "requires_downtime": false
+}

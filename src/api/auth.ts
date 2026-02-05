@@ -19,6 +19,7 @@ function mapSupabaseToUser(
   avatarUrl: string | undefined,
   profile: Profile | null,
 ): User {
+  const verificationStatus = profile?.verification_status
   return {
     id,
     email,
@@ -26,6 +27,10 @@ function mapSupabaseToUser(
     avatar_url: profile?.avatar_url ?? avatarUrl ?? undefined,
     role: (profile?.role as User['role']) ?? 'buyer',
     email_verified: emailConfirmed,
+    kyc_status:
+      verificationStatus && verificationStatus !== 'none'
+        ? (verificationStatus as User['kyc_status'])
+        : undefined,
     created_at: '',
     updated_at: profile?.updated_at ?? '',
   }

@@ -1,0 +1,12 @@
+{
+  "migration_name": "20250205150001_create_user_kyc_documents_table",
+  "created_at": "2025-02-05T15:00:01Z",
+  "description": "Create user_kyc_documents table for KYC document uploads and verification",
+  "tables_created": ["user_kyc_documents"],
+  "tables_modified": [],
+  "tables_deleted": [],
+  "breaking_changes": false,
+  "rollback_sql": "DROP TABLE IF EXISTS user_kyc_documents CASCADE;",
+  "estimated_rows": 0,
+  "requires_downtime": false
+}
