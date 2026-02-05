@@ -1,0 +1,12 @@
+{
+  "migration_name": "20250205180000_create_listing_reviews_table",
+  "created_at": "2025-02-05T18:00:00Z",
+  "description": "Create listing_reviews table for ratings and comments on listings",
+  "tables_created": ["listing_reviews"],
+  "tables_modified": [],
+  "tables_deleted": [],
+  "breaking_changes": false,
+  "rollback_sql": "DROP TABLE IF EXISTS listing_reviews CASCADE;",
+  "estimated_rows": 0,
+  "requires_downtime": false
+}
