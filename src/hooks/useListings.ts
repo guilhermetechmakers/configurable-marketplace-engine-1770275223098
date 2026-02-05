@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { listingsApi } from '@/api/listings'
+import { listingsApi, type ListingsSearchParams } from '@/api/listings'
 import { toast } from 'sonner'
 import type { UpdateListingInput } from '@/types/listing'
 
@@ -20,15 +20,9 @@ export function useListingCategories() {
   })
 }
 
-export function useListingsSearch(params: {
-  q?: string
-  category_id?: string
-  page?: number
-  limit?: number
-  sort?: string
-}) {
+export function useListingsSearch(params: ListingsSearchParams) {
   return useQuery({
-    queryKey: listingKeys.search(params),
+    queryKey: listingKeys.search(params as Record<string, unknown>),
     queryFn: () => listingsApi.search(params),
     staleTime: 1000 * 60 * 2,
   })
