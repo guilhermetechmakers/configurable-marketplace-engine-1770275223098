@@ -53,6 +53,8 @@ export default {
         'fade-in-down': 'fadeInDown 0.4s ease-out',
         'slide-in-left': 'slideInLeft 0.3s ease-out',
         'slide-in-right': 'slideInRight 0.3s ease-out',
+        'slide-in-from-right': 'slide-in-from-right 0.5s ease-out',
+        'slide-out-to-right': 'slide-out-to-right 0.3s ease-in',
         'scale-in': 'scaleIn 0.2s ease-out',
         'bounce-in': 'bounceIn 0.6s ease-out',
       },
@@ -90,6 +92,14 @@ export default {
         shimmer: {
           '0%': { backgroundPosition: '-200% 0' },
           '100%': { backgroundPosition: '200% 0' },
+        },
+        'slide-in-from-right': {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        'slide-out-to-right': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(100%)' },
         },
       },
       backgroundSize: {

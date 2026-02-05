@@ -1,0 +1,12 @@
+{
+  "migration_name": "20250205170000_create_seller_payouts_table",
+  "created_at": "2025-02-05T17:00:00Z",
+  "description": "Create seller_payouts table for payout history and balances",
+  "tables_created": ["seller_payouts"],
+  "tables_modified": [],
+  "tables_deleted": [],
+  "breaking_changes": false,
+  "rollback_sql": "DROP TABLE IF EXISTS seller_payouts CASCADE;",
+  "estimated_rows": 0,
+  "requires_downtime": false
+}

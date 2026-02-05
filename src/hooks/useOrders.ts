@@ -6,6 +6,8 @@ export const orderKeys = {
   all: ['orders'] as const,
   list: (params?: { page?: number; status?: string }) =>
     [...orderKeys.all, 'list', params] as const,
+  sellerList: (params?: { page?: number; status?: string }) =>
+    [...orderKeys.all, 'seller', params] as const,
   detail: (id: string) => [...orderKeys.all, id] as const,
 }
 
@@ -34,6 +36,33 @@ export function useCreateOrder() {
     },
     onError: (err: Error) => {
       toast.error(err.message ?? 'Failed to place order')
+    },
+  })
+}
+
+export function useSellerOrders(params?: {
+  page?: number
+  status?: string
+}) {
+  return useQuery({
+    queryKey: orderKeys.sellerList(params),
+    queryFn: () => ordersApi.getSellerOrders(params),
+    staleTime: 1000 * 60,
+  })
+}
+
+export function useUpdateOrderStatus() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ id, status }: { id: string; status: string }) =>
+      ordersApi.updateStatus(id, status),
+    onSuccess: (updated) => {
+      queryClient.setQueryData(orderKeys.detail(updated.id), updated)
+      queryClient.invalidateQueries({ queryKey: orderKeys.all })
+      toast.success('Order status updated')
+    },
+    onError: (err: Error) => {
+      toast.error(err.message ?? 'Failed to update order status')
     },
   })
 }

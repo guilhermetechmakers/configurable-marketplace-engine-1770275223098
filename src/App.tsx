@@ -6,7 +6,9 @@ import { Auth } from '@/pages/Auth'
 import { PasswordReset } from '@/pages/PasswordReset'
 import { VerifyEmail } from '@/pages/VerifyEmail'
 import { Profile } from '@/pages/Profile'
+import { DashboardLayout } from '@/components/layout/DashboardLayout'
 import { Dashboard } from '@/pages/Dashboard'
+import { SellerDashboard } from '@/pages/SellerDashboard'
 import { Listings } from '@/pages/Listings'
 import { ListingDetail } from '@/pages/ListingDetail'
 import { CreateListing } from '@/pages/CreateListing'
@@ -45,7 +47,10 @@ export default function App() {
           <Route path="/password-reset" element={<PasswordReset />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="seller" element={<SellerDashboard />} />
+          </Route>
           <Route path="/listings" element={<Listings />} />
           <Route path="/listings/create" element={<CreateListing />} />
           <Route path="/listings/:id" element={<ListingDetail />} />

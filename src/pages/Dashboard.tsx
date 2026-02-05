@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { MainLayout } from '@/components/layout/MainLayout'
 import { AnimatedPage } from '@/components/AnimatedPage'
 import { useCurrentUser } from '@/hooks/useAuth'
 import { useMyOrders } from '@/hooks/useOrders'
@@ -68,33 +67,29 @@ export function Dashboard() {
 
   if (userLoading) {
     return (
-      <MainLayout>
-        <AnimatedPage className="mx-auto max-w-7xl px-6 py-12">
-          <Skeleton className="h-10 w-48" />
-          <Skeleton className="mt-8 h-32 w-full" />
-        </AnimatedPage>
-      </MainLayout>
+      <AnimatedPage className="mx-auto max-w-7xl px-6 py-12">
+        <Skeleton className="h-10 w-48" />
+        <Skeleton className="mt-8 h-32 w-full" />
+      </AnimatedPage>
     )
   }
 
   if (!user) {
     return (
-      <MainLayout>
-        <AnimatedPage className="mx-auto max-w-md px-6 py-12 text-center">
-          <p className="text-muted-foreground">Please log in to view your dashboard.</p>
-          <Button asChild className="mt-4">
-            <Link to="/login">Log in</Link>
-          </Button>
-        </AnimatedPage>
-      </MainLayout>
+      <AnimatedPage className="mx-auto max-w-md px-6 py-12 text-center">
+        <p className="text-muted-foreground">Please log in to view your dashboard.</p>
+        <Button asChild className="mt-4">
+          <Link to="/login">Log in</Link>
+        </Button>
+      </AnimatedPage>
     )
   }
 
   const isSeller = user.role === 'seller'
 
   return (
-    <MainLayout>
-      <AnimatedPage className="mx-auto max-w-7xl px-6 py-8 md:px-8">
+    <>
+    <AnimatedPage className="mx-auto max-w-7xl px-6 py-8 md:px-8">
         {/* Header */}
         <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
@@ -326,7 +321,7 @@ export function Dashboard() {
         }}
         isPending={addRecommendation.isPending || setFeedback.isPending}
       />
-    </MainLayout>
+    </>
   )
 }
 
